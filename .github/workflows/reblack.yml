@@ -4,6 +4,7 @@ name: reblack
 on: [pull_request]
 jobs:
   build:
+    runs-on: ubuntu-latest
     steps:
       - name: Install psf/black
         run: |
