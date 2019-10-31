@@ -1,25 +1,33 @@
 # https://peterevans.dev/posts/github-actions-how-to-automate-code-formatting-in-pull-requests
 
-name: auto-format
-on: pull_request
+name: reblack
+on: [pull_request]
 jobs:
-  format:
+  build:
     runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      matrix:
+        python-version: [3.7]
     steps:
-      - uses: actions/checkout@v1
-      - name: black
-        uses: lgeiger/black-action@v1.0.1
-        with:
-          args: .
-      - name: Check for modified files
-        id: git-check
-        run: echo ::set-output name=modified::$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)
-      - name: Push changes
-        if: steps.git-check.outputs.modified == 'true'
-        run: |
-          git config --global user.name 'Peter Evans'
-          git config --global user.email 'peter-evans@users.noreply.github.com'
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-          git checkout $GITHUB_HEAD_REF
-          git commit -am "fixup: Format Python code with psf/black"
-          git push
+    - uses: actions/checkout@v1
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install psf/black
+      run: python -m pip install black
+    - name: black-check
+      run: echo ::set-output name=black_needed::$(if black --check .; then echo "true"; else echo "false"; fi)
+      # continue-on-error: true
+    - name: Echo black_needed
+      run: echo steps.black-check.outputs.black_needed
+    - name: Push changes
+      if: steps.git-check.outputs.modified == 'true'
+      run: |
+        git config --global user.name 'Peter Evans'
+        git config --global user.email 'peter-evans@users.noreply.github.com'
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+        git checkout $GITHUB_HEAD_REF
+        git commit -am "fixup: Format Python code with psf/black"
+        git push
