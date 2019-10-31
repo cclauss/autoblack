@@ -2,7 +2,7 @@
 ### GitHub Action that uses Black to reformat Python code in incoming pull requests.
 If all Python code in the pull request is complient with Black then this Action does nothing.
 
-Othewrwise, Black is run and a new commit with reformatted code is added to the incoming pull request.
+Otherwise, Black is run and a new commit with reformatted code is added to the incoming pull request.
 
 Inspired by:
 * https://github.com/lgeiger/black-action/pull/2
