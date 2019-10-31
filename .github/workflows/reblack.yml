@@ -1,3 +1,8 @@
+# GitHub Action that uses Black to reformat the Python code in an incoming pull request.
+# If all Python code in the pull request is complient with Black then this Action does nothing.
+# Othewrwise, Black is run and a new commit is added to the incoming pull request.
+
+# Inspired by:
 # https://peterevans.dev/posts/github-actions-how-to-automate-code-formatting-in-pull-requests
 
 name: reblack
@@ -16,10 +21,10 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install psf/black
-        run: pip3 install black
+        run: pip install black
       - name: Run black --check .
         run: black --check .
-      - name: If needed, run black and push changes
+      - name: If needed, run black and commit changes
         if: failure()
         run: |
           black .
