@@ -1,11 +1,9 @@
 # GitHub Action that uses Black to reformat the Python code in an incoming pull request.
 # If all Python code in the pull request is complient with Black then this Action does nothing.
-# Othewrwise, Black is run and a new commit is added to the incoming pull request.
+# Othewrwise, Black is run and its changes are committed back to the incoming pull request.
+# https://github.com/cclauss/autoblack
 
-# Inspired by:
-# https://peterevans.dev/posts/github-actions-how-to-automate-code-formatting-in-pull-requests
-
-name: reblack
+name: autoblack
 on: [pull_request]
 jobs:
   build:
@@ -24,11 +22,11 @@ jobs:
         run: pip install black
       - name: Run black --check .
         run: black --check .
-      - name: If needed, run black and commit changes
+      - name: If needed, commit black changes to the pull request
         if: failure()
         run: |
           black .
-          git config --global user.name 'reblack'
+          git config --global user.name 'autoblack'
           git config --global user.email 'cclauss@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
           git checkout $GITHUB_HEAD_REF
