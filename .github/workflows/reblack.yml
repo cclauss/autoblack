@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Install psf/black
         run: |
-          pip3 install --upgrade setuptools
+          pip3 install --upgrade pip setuptools
           pip3 install black
       - name: Run black --check .
         run: black --check .
