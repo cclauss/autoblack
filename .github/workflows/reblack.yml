@@ -18,22 +18,16 @@ jobs:
     - name: Install psf/black
       run: python -m pip install black
     - name: black-check
-      run: echo ::set-output name=black_needed::$(if black --check .; then echo "false"; else echo "true"; fi)
+      run: echo ::set-output name=black_needed::$(black --check .; if $? then echo "true"; else echo "false"; fi)
     - name: black --check . passed
       if: steps.black-check.outputs.black_needed == 'false'
       run: echo black --check . passed
     - name: black --check . failed
       if: steps.black-check.outputs.black_needed == 'true'
       run: echo black --check . failed
-    - name: git --version || true
-      run: git --version || true
-    - name: apt install git
-      run: apt install git
     - name: Push changes
       if: steps.black-check.outputs.black_needed == 'true'
       run: |
-        git --version || true
-        apt install git
         git --version
         git config --global user.name 'reblack'
         git config --global user.email 'reblack@users.noreply.github.com'
