@@ -1,8 +1,8 @@
 # autoblack
 ### GitHub Action that uses Black to reformat Python code in incoming pull requests.
-If all Python code in an incoming pull request is complient with Black then this Action does nothing.
+If all Python code in a pull request's branch is already compliant with psf/black then this Action does nothing.
 
-Otherwise, Black is run and a new commit with reformatted code is added to that incoming pull request.
+Otherwise, Black reformatted the Python code and those changes are added as a new commit to that pull request.
 
 This means that no pull request will have passing tests until its code is Black compliant and that reformatting is automatic.
 
