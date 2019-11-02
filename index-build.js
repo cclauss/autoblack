@@ -8,7 +8,7 @@ var conversion =   { 'cli': 1, 'api': 3, 'files': 5, 'misc': 7 }
 glob(root + '/{README.md,doc/*/*.md}', function (er, files) {
   if (er) throw er
 
-  output(files.map(function (f) {
+  output(files.map(function (f)   {
     var b = path.basename(f)
     if (b === 'README.md') return [0, b]
     if (b === 'index.md') return null
