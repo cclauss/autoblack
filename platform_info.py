@@ -1,5 +1,5 @@
 import inspect
-import platform
+import platform 
 
 for name, value in inspect.getmembers(platform):
     if name[0] != "_" and callable(value):
