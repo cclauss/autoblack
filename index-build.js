@@ -10,16 +10,16 @@ glob(root + '/{README.md,doc/*/*.md}', function (er, files) {
 
   output(files.map(function (f) {
     var b = path.basename(f)
-    if (b == 'README.md') return [0, b]
-    if (b == 'index.md') return null
+    if (b === 'README.md') return [0, b]
+    if (b === 'index.md') return null
     var s = conversion[path.basename(path.dirname(f))]
     return [s, f]
   }).filter(function (f) {
     return f
   }).sort(function (a, b) {
     return (a[0] === b[0])
-      ? (path.basename(a[1]) == 'npm.md' ? -1
-        : path.basename(b[1]) == 'npm.md' ? 1
+      ? (path.basename(a[1]) === 'npm.md' ? -1
+        : path.basename(b[1]) === 'npm.md' ? 1
           : a[1] > b[1] ? 1 : -1)
       : a[0] - b[0]
   }))
