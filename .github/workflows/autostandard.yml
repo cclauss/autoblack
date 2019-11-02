@@ -8,18 +8,16 @@ on: [pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
-    #strategy:
-    #  max-parallel: 1
-    #  matrix:
-    #    node-version: [12.x]
     steps:
       - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 12.x
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x  # ${{ matrix.node-version }}
-      - name: npx standard
-        run: npx standard
+          node-version: 12.x
+      - name: npm install standard --global
+        run:  npm install standard --global
+      - name: standard
+        run:  standard
       - name: If needed, commit standard --fix changes to the pull request
         if: failure()
         run: |
@@ -27,6 +25,6 @@ jobs:
           git config --global user.email 'cclauss@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
           git checkout $GITHUB_HEAD_REF
-          npx standard --fix .
+          standard --fix
           git commit -am "fixup: Format JavaScript code to be Standard Style"
           git push
