@@ -1,10 +1,12 @@
 # autoblack
-### GitHub Action that uses Black to reformat Python code in incoming pull requests.
-If all Python code in a pull request's branch is already compliant with psf/black then this Action does nothing.
 
-Otherwise, Black reformatted the Python code and those changes are added as a new commit to that pull request.
+### GitHub Action that uses Black to reformat the Python code in incoming pull requests.
 
-This means that no pull request will have passing tests until its code is Black compliant and that reformatting is automatic.
+If all Python code in a pull request is already Blackened then this Action gives the PR a ✅ and does nothing else.
+
+Otherwise, Blackened code is _committed back_ to that pull request.
+
+This means that no pull request will have passing tests until its code is Blackened and that reformatting is _automatic_ with no pre-commit hooks, etc.
 
 Inspired by:
 * https://github.com/lgeiger/black-action/pull/2
@@ -12,7 +14,7 @@ Inspired by:
 
 ### How can I try it out?
 1. [Edit the `platform_info.py` file in this repo](https://github.com/cclauss/autoblack/edit/master/platform_info.py).
-2. Make a change that is not Black compliant.
+2. Make a change that contains Python code which is not Blackened.
 3. Submit that change as a pull request.
 4. This Action should run and reformat the code to be Black compliant and commit that to your pull request.
 
