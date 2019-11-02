@@ -21,10 +21,10 @@ jobs:
       - name: If needed, commit standard --fix changes to the pull request
         if: failure()
         run: |
+          standard --fix || true
           git config --global user.name 'autostandard'
           git config --global user.email 'cclauss@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
           git checkout $GITHUB_HEAD_REF
-          standard --fix || true
           git commit -am "fixup: Format JavaScript code to be Standard Style"
           git push
