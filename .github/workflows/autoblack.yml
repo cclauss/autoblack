@@ -36,6 +36,8 @@ jobs:
           git remote -v || true
           git branch || true
 
-          git push
+          git push origin HEAD:${GITHUB_REF:5}
+          
+          # git push
           git remote -v || true
           git branch || true
