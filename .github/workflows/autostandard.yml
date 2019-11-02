@@ -10,19 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Use Node.js 12.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-      - name: npm install standard --global
-        run:  npm install standard --global
-      - name: standard
-        run:  standard
+      - uses: actions/setup-node@v1
+      - run: npm install standard --global
+      - run: standard
       - name: If needed, commit standard --fix changes to the pull request
         if: failure()
         run: |
           standard --fix || true
-          git config --global user.name 'autostandard'
+          git config --global user.name github-actions
           git config --global user.email 'cclauss@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
           git checkout $GITHUB_HEAD_REF
