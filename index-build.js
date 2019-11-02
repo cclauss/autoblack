@@ -25,6 +25,7 @@ glob(root + '/{README.md,doc/*/*.md}', function (er, files) {
   }))
 })
 
+
 function output (files) {
   console.log(
     'npm-index(7) -- Index of all npm documentation\n' +
@@ -37,8 +38,9 @@ function output (files) {
   writeLines(files, 7, 'Misc', 'Various other bits and bobs')
 }
 
+
 function writeLines (files, sxn, heading, desc) {
-  if (heading) {
+  if   (heading) {
     console.log('## %s\n\n%s\n', heading, desc)
   }
   files.filter(function (f) {
