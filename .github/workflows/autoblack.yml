@@ -28,9 +28,9 @@ jobs:
           git remote -v || true
           git branch || true
           
-          git checkout $GITHUB_HEAD_REF
-          git remote -v || true
-          git branch || true
+          #git checkout $GITHUB_HEAD_REF
+          #git remote -v || true
+          #git branch || true
           
           git commit -am "fixup: Format Python code with psf/black"
           git remote -v || true
