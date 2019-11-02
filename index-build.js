@@ -28,7 +28,7 @@ glob(root + '/{README.md,doc/*/*.md}', function (er, files) {
 function output (files) {
   console.log(
     'npm-index(7) -- Index of all npm documentation\n' +
-    '==============================================\n') 
+    '==============================================\n')
 
   writeLines(files, 0)
   writeLines(files, 1, 'Command Line Documentation', 'Using npm on the command line')
