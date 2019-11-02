@@ -23,7 +23,7 @@ jobs:
       - name: If needed, commit standard --fix changes to the pull request
         if: failure()
         run: |
-          standard --fix .
+          npx standard --fix .
           git config --global user.name 'autostandard'
           git config --global user.email 'cclauss@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
