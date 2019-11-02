@@ -26,7 +26,7 @@ glob(root + '/{README.md,doc/*/*.md}', function (er, files) {
 })
 
 function output (files) {
-  console.log(
+   console.log(
     'npm-index(7) -- Index of all npm documentation\n' +
     '==============================================\n')
 
