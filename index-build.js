@@ -3,14 +3,14 @@ var fs = require('fs')
 var path = require('path')
 var root = path.resolve(__dirname, '..')
 var glob = require('glob')
-var conversion = { 'cli' : 1, 'api' : 3, 'files' : 5, 'misc' : 7 }
+var conversion = { cli: 1, api: 3, files: 5, misc: 7 }
 
 glob(root + '/{README.md,doc/*/*.md}', function (er, files) {
   if (er) throw er
 
   output(files.map(function (f) {
     var b = path.basename(f)
-    if (b == 'README.md') return [0, b] 
+    if (b == 'README.md') return [0, b]
     if (b == 'index.md') return null
     var s = conversion[path.basename(path.dirname(f))]
     return [s, f]
@@ -25,7 +25,6 @@ glob(root + '/{README.md,doc/*/*.md}', function (er, files) {
   }))
 })
 
-
 function output (files) {
   console.log(
     'npm-index(7) -- Index of all npm documentation\n' +
@@ -38,9 +37,8 @@ function output (files) {
   writeLines(files, 7, 'Misc', 'Various other bits and bobs')
 }
 
-
 function writeLines (files, sxn, heading, desc) {
-  if   (heading) {
+  if (heading) {
     console.log('## %s\n\n%s\n', heading, desc)
   }
   files.filter(function (f) {
