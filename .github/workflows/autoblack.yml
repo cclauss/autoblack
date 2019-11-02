@@ -27,20 +27,20 @@ jobs:
           git remote -v || true
           git branch || true
           echo "A"
-          git add locala ***github.com/${GITHUB_ACTOR}/autoblack || true
+          git remote add locala ***github.com/${GITHUB_ACTOR}/autoblack || true
           echo "B"
-          git add localb github.com/${GITHUB_ACTOR}/autoblack || true
+          git remote add localb github.com/${GITHUB_ACTOR}/autoblack || true
           echo "C"
-          git add localc git@github.com/${GITHUB_ACTOR}/autoblack.git || true
+          git remote add localc git@github.com/${GITHUB_ACTOR}/autoblack.git || true
           echo "D"
-          git add locald https://github.com/${GITHUB_ACTOR}/autoblack || true
-          echo "D"          
+          git remote add locald https://github.com/${GITHUB_ACTOR}/autoblack || true
+          echo "E"          
           git remote -v || true
           git branch || true
-          echo "E"          
+          echo "F"          
           git push localb || true
           git push localb HEAD:${GITHUB_REF:5} || true
-          echo "F"          
+          echo "G"          
           git push localc || true
           git push localc HEAD:${GITHUB_REF:5} || true
           # git push origin HEAD:${GITHUB_REF:5}
