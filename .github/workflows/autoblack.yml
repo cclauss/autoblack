@@ -38,7 +38,7 @@ jobs:
 
           git remote -v || true
           git branch || true
-          git add local ***github.com/${GITHUB_ACTOR)/autoblack
+          git add local ***github.com/${GITHUB_ACTOR}/autoblack
           
           git remote -v || true
           git branch || true
