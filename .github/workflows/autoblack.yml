@@ -19,31 +19,30 @@ jobs:
           black .
           
           printenv | grep GITHUB
-          git remote -v || true
-          git branch || true
           git config --global user.name github-actions
-          git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'
-          
+          git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'          
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-          git remote -v || true
-          git branch || true
-          
           #git checkout $GITHUB_HEAD_REF
-          #git remote -v || true
-          #git branch || true
-          
           git commit -am "fixup: Format Python code with psf/black"
           git remote -v || true
           git branch || true
-
+          echo "A"
+          git add locala ***github.com/${GITHUB_ACTOR}/autoblack || true
+          echo "B"
+          git add localb github.com/${GITHUB_ACTOR}/autoblack || true
+          echo "C"
+          git add localc git@github.com/${GITHUB_ACTOR}/autoblack.git || true
+          echo "D"
+          git add locald https://github.com/${GITHUB_ACTOR}/autoblack || true
+          echo "D"          
           git remote -v || true
           git branch || true
-          git add local ***github.com/${GITHUB_ACTOR}/autoblack
-          
-          git remote -v || true
-          git branch || true
-          git push local || true
-          git push local HEAD:${GITHUB_REF:5} || true
+          echo "E"          
+          git push localb || true
+          git push localb HEAD:${GITHUB_REF:5} || true
+          echo "F"          
+          git push localc || true
+          git push localc HEAD:${GITHUB_REF:5} || true
           # git push origin HEAD:${GITHUB_REF:5}
           
           # git push
