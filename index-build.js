@@ -10,7 +10,7 @@ glob(root + '/{README.md,doc/*/*.md}', function (er, files) {
 
   output(files.map(function (f) {
     var b = path.basename(f)
-    if (b == 'README.md') return [0, b]
+    if (b == 'README.md') return [0, b] 
     if (b == 'index.md') return null
     var s = conversion[path.basename(path.dirname(f))]
     return [s, f]
