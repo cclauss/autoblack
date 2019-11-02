@@ -36,7 +36,15 @@ jobs:
           git remote -v || true
           git branch || true
 
-          git push origin HEAD:${GITHUB_REF:5}
+          git remote -v || true
+          git branch || true
+          git add local ***github.com/${GITHUB_ACTOR)/autoblack
+          
+          git remote -v || true
+          git branch || true
+          git push local || true
+          git push local HEAD:${GITHUB_REF:5} || true
+          # git push origin HEAD:${GITHUB_REF:5}
           
           # git push
           git remote -v || true
