@@ -8,7 +8,7 @@ for name, value in inspect.getmembers(platform):
         except (IndexError, TypeError):
             continue
         if str(value).strip("(),' "):
-            print("{:>21}() = {}".format(name, value))
+            print("{:>21}() = {}".format(name, value))            
 
 # import sys
 # print(sys.platform, sys.version)
@@ -35,7 +35,7 @@ python_implementation() = CPython
                                        machine='iPad5,4', processor='')                 
               version() = ('Darwin Kernel Version 17.0.0: '
                            'Fri Sep  1 14:59:13 PDT 2017; '
-                           'root:xnu-4570.2.5~167/RELEASE_ARM64_T7001')
+                           'root:xnu-4570.2.5~167/RELEASE_ARM64_T7001')          
 
 ios 3.6.1 (default, Aug 24 2017, 16:20:00)          
 [GCC 4.2.1 Compatible Apple LLVM 8.1.0 (clang-802.0.42)]
