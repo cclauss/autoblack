@@ -26,6 +26,8 @@ jobs:
           git commit -am "fixup: Format Python code with psf/black"
           git push
 
+          # https://github.com/cclauss/autoblack/pull/9
+          # https://github.com/elephantworks/autoblack/edit/patch-1/platform_info.py?pr=%2Fcclauss%2Fautoblack%2Fpull%2F9
           #git remote -v || true
           #git branch || true
           #echo "A"
