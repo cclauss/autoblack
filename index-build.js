@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-var fs = require('fs')  
-var path = require('path')  
-var root = path.resolve(__dirname,  '..')
+var fs = require('fs')
+var path = require('path')
+var root = path.resolve(__dirname, '..')
 var glob = require('glob')
-var conversion = { cli: 1, api: 3, files: 5,  misc: 7 }
+var conversion = { cli: 1, api: 3, files: 5, misc: 7 }
 
-glob(root+'/{README.md,doc/*/*.md}', function (er,  files) {
+glob(root + '/{README.md,doc/*/*.md}', function (er, files) {
   if (er) throw er
 
   output(files.map(function (f) {
