@@ -4,7 +4,7 @@
 # https://github.com/cclauss/autoblack
 
 name: autostandard
-on: [pull_request]
+on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,5 +22,5 @@ jobs:
           git config --global user.email 'cclauss@users.noreply.github.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
           git checkout $GITHUB_HEAD_REF
-          git commit -am "fixup: Format JavaScript code to be Standard Style"
+          git commit -am "fixup: Format JavaScript code to be Standard Style $GITHUB_EVENT_NAME"
           git push
