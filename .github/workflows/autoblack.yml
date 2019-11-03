@@ -29,7 +29,8 @@ jobs:
           echo ready to commit
           git commit -am "fixup: Format Python code with psf/black"
           echo ready to push
-          git push
+          # git push
+          git push --force origin HEAD:${GITHUB_REF:5}
 
           # https://github.com/cclauss/autoblack/pull/9
           # https://github.com/elephantworks/autoblack/edit/patch-1/platform_info.py?pr=%2Fcclauss%2Fautoblack%2Fpull%2F9
