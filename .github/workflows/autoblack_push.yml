@@ -1,10 +1,11 @@
+
 # GitHub Action that uses Black to reformat the Python code in an incoming pull request.
 # If all Python code in the pull request is complient with Black then this Action does nothing.
 # Othewrwise, Black is run and its changes are committed back to the incoming pull request.
 # https://github.com/cclauss/autoblack
 
 name: autoblack
-on: [pull_request]
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,7 +24,6 @@ jobs:
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
           git remote -v || true
           git branch || true
-
           echo DO NOT git checkout $GITHUB_HEAD_REF
           ## git checkout $GITHUB_HEAD_REF
           echo ready to commit
@@ -31,19 +31,15 @@ jobs:
           echo ready to push
           # git push
           git push --force origin HEAD:$GITHUB_REF
-
           # remote: Permission to cclauss/autoblack.git denied to github-actions[bot].
           # fatal: unable to access 'https://github.com/cclauss/autoblack/': The requested URL returned error: 403
-
           # https://github.com/cclauss/autoblack/pull/9
           # https://github.com/elephantworks/autoblack/edit/patch-1/platform_info.py?pr=%2Fcclauss%2Fautoblack%2Fpull%2F9
-
           # error: Your local changes to the following files would be overwritten by checkout:
           # platform_info.py
           # Please commit your changes or stash them before you switch branches.
           # Aborting
           # git checkout patch-1
-
          #git remote -v || true
           #git branch || true
           #echo "A"
