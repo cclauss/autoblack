@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var fs = require('fs')
+var fs = require('fs') 
 var path = require('path')
 var root = path.resolve(__dirname, '..')
 var glob = require('glob')
