@@ -17,34 +17,36 @@ jobs:
         if: failure()
         run: |
           black .
-          
           printenv | grep GITHUB
           git config --global user.name github-actions
           git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'          
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-          #git checkout $GITHUB_HEAD_REF
+          echo git checkout $GITHUB_HEAD_REF
+          git checkout $GITHUB_HEAD_REF
           git commit -am "fixup: Format Python code with psf/black"
-          git remote -v || true
-          git branch || true
-          echo "A"
-          git remote add locala ***github.com/${GITHUB_ACTOR}/autoblack || true
-          echo "B"
-          git remote add localb github.com/${GITHUB_ACTOR}/autoblack || true
-          echo "C"
-          git remote add localc git@github.com/${GITHUB_ACTOR}/autoblack.git || true
-          echo "D"
-          git remote add locald https://github.com/${GITHUB_ACTOR}/autoblack || true
-          echo "E"          
-          git remote -v || true
-          git branch || true
-          echo "F"          
-          #git push locala || true
-          git push locala HEAD:${GITHUB_REF:5} || true
-          echo "G"          
-          #git push locald || true
-          git push locald HEAD:${GITHUB_REF:5} || true
-          # git push origin HEAD:${GITHUB_REF:5}
-          echo "H"
-          # git push
-          git remote -v || true
-          git branch || true
+          git push
+
+          #git remote -v || true
+          #git branch || true
+          #echo "A"
+          #git remote add locala ***github.com/${GITHUB_ACTOR}/autoblack || true
+          #echo "B"
+          #git remote add localb github.com/${GITHUB_ACTOR}/autoblack || true
+          #echo "C"
+          #git remote add localc git@github.com/${GITHUB_ACTOR}/autoblack.git || true
+          #echo "D"
+          #git remote add locald https://github.com/${GITHUB_ACTOR}/autoblack || true
+          #echo "E"          
+          #git remote -v || true
+          #git branch || true
+          #echo "F"          
+          ##git push locala || true
+          #git push locala HEAD:${GITHUB_REF:5} || true
+          #echo "G"          
+          ##git push locald || true
+          #git push locald HEAD:${GITHUB_REF:5} || true
+          ## git push origin HEAD:${GITHUB_REF:5}
+          #echo "H"
+          ## git push
+          #git remote -v || true
+          #git branch || true
