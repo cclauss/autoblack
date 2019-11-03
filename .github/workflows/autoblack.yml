@@ -38,8 +38,8 @@ jobs:
           git remote -v || true
           git branch || true
           echo "F"          
-          #git push localc || true
-          git push localc HEAD:${GITHUB_REF:5} || true
+          #git push locala || true
+          git push locala HEAD:${GITHUB_REF:5} || true
           echo "G"          
           #git push locald || true
           git push locald HEAD:${GITHUB_REF:5} || true
