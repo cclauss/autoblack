@@ -1,4 +1,4 @@
-import inspect   
+import inspect  
 import platform
 
 for name, value in inspect.getmembers(platform):
