@@ -21,13 +21,25 @@ jobs:
           git config --global user.name github-actions
           git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'          
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git remote -v || true
+          git branch || true
+
           echo git checkout $GITHUB_HEAD_REF
           git checkout $GITHUB_HEAD_REF
+          echo ready to commit
           git commit -am "fixup: Format Python code with psf/black"
+          echo ready to push
           git push
 
           # https://github.com/cclauss/autoblack/pull/9
           # https://github.com/elephantworks/autoblack/edit/patch-1/platform_info.py?pr=%2Fcclauss%2Fautoblack%2Fpull%2F9
+
+          # error: Your local changes to the following files would be overwritten by checkout:
+          # platform_info.py
+          # Please commit your changes or stash them before you switch branches.
+          # Aborting
+          # git checkout patch-1
+
           #git remote -v || true
           #git branch || true
           #echo "A"
