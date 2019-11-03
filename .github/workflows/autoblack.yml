@@ -30,7 +30,7 @@ jobs:
           git commit -am "fixup: Format Python code with psf/black"
           echo ready to push
           # git push
-          git push --force origin HEAD:${GITHUB_REF:5}
+          git push --force origin HEAD:$GITHUB_REF
 
           # remote: Permission to cclauss/autoblack.git denied to github-actions[bot].
           # fatal: unable to access 'https://github.com/cclauss/autoblack/': The requested URL returned error: 403
