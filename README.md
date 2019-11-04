@@ -14,7 +14,7 @@ Inspired by:
 
 ### tl;dr: It does not work.
 
-> After poking around a bit, it seems to be a design decision by the GitHub actions team that the GitHub actions bot can't push to either repo on a pull request from fork.
+> After poking around a bit, it seems to be a design decision by the GitHub Actions team that the GitHub Actions bot can't push to either repo on a pull request from fork.
 
 See [this comment from @chrispat](https://github.community/t5/GitHub-Actions/Can-t-push-to-forked-repository-on-the-original-repository-s/m-p/35916/highlight/true#M2372).
 
