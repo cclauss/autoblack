@@ -16,13 +16,15 @@ jobs:
       - name: If needed, commit black changes to the pull request
         if: failure()
         run: |
-          black .
           printenv | grep GITHUB
           git config --global user.name 'cclauss'
           git config --global user.email 'cclauss@users.noreply.github.com'          
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-          git remote -v || true
-          git branch || true
+          git remote -v
+          git branch
+          git status
+          black .
+          git status
 
           echo DO NOT git checkout $GITHUB_HEAD_REF
           ## git checkout $GITHUB_HEAD_REF
