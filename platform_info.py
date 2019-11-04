@@ -2,7 +2,8 @@ import inspect
 import platform
 
 for name, value in inspect.getmembers(platform):
-    if name[0] != "_" and callable(value):
+    
+    if name[0] != '_' and callable(value):
         try:
             value = value()
         except (IndexError, TypeError):
@@ -14,8 +15,10 @@ for name, value in inspect.getmembers(platform):
 # print(sys.platform, sys.version)
 
 """
-         architecture() = ('64bit', '')
-              mac_ver() = ('11.0.3', ('', '', ''), 'iPad5,4')
+         architecture() = ('64bit', '')     
+              mac_ver() = ('11.0.3', 
+              ('', '', ''),
+              'iPad5,4')
               machine() = iPad5,4
                  node() = CCC-iPad
              platform() = Darwin-17.0.0-iPad5,4-64bit
