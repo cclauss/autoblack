@@ -18,8 +18,8 @@ jobs:
         run: |
           black .
           printenv | grep GITHUB
-          git config --global user.name github-actions
-          git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'          
+          git config --global user.name 'cclauss'
+          git config --global user.email 'cclauss@users.noreply.github.com'          
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
           git remote -v || true
           git branch || true
