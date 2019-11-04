@@ -12,6 +12,12 @@ Inspired by:
 * https://github.com/lgeiger/black-action/pull/2
 * https://peterevans.dev/posts/github-actions-how-to-automate-code-formatting-in-pull-requests
 
+### tl;dr: It does not work.
+
+> After poking around a bit, it seems to be a design decision by the GitHub actions team that the GitHub actions bot can't push to either repo on a pull request from fork.
+
+See [this comment from @chrispat](https://github.community/t5/GitHub-Actions/Can-t-push-to-forked-repository-on-the-original-repository-s/m-p/35916/highlight/true#M2372).
+
 ### How can I try it out?
 1. [Edit the `platform_info.py` file in this repo](https://github.com/cclauss/autoblack/edit/master/platform_info.py).
 2. Make a change that contains Python code which is not Blackened.
