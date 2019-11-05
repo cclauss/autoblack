@@ -8,6 +8,8 @@ jobs:
       matrix:
         os: [macOS-latest, ubuntu-latest, windows-latest]
     steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-python@v1
       - name: Display the path
         shell: python
         run: |
