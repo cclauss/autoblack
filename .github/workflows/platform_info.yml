@@ -17,7 +17,7 @@ jobs:
           import sys
           print("Python {}.{}.{}".format(*sys.version_info))
       - name: Gyp test
-        script: python
+        shell: python
         run: |
           from gyp_xcode_emulation import XcodeVersion
           print(XcodeVersion())
