@@ -18,11 +18,8 @@ jobs:
           import sys
           print("Python {}.{}.{}".format(*sys.version_info))
       - name: Gyp test
-        shell: python
         run: |
-          from __future__ import absolute_import
-          import gyp_xcode_emulation
-          print(gyp_xcode_emulation.XcodeVersion())
+          python3 -c "import gyp_xcode_emulation ; print(gyp_xcode_emulation.XcodeVersion())"
       - name: Display platform information
         shell: python
         run: |
