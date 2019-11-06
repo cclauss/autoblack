@@ -16,6 +16,11 @@ jobs:
         run: |
           import sys
           print("Python {}.{}.{}".format(*sys.version_info))
+      - name: Gyp test
+        script: python
+        run: |
+          from gyp_xcode_emulation import XcodeVersion
+          print(XcodeVersion())
       - name: Display platform information
         shell: python
         run: |
