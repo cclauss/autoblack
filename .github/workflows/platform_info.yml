@@ -21,8 +21,8 @@ jobs:
         shell: python
         run: |
           from __future__ import absolute_import
-          from .gyp_xcode_emulation import XcodeVersion
-          print(XcodeVersion())
+          import gyp_xcode_emulation
+          print(gyp_xcode_emulation.XcodeVersion())
       - name: Display platform information
         shell: python
         run: |
