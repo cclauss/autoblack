@@ -19,7 +19,8 @@ jobs:
       - name: Gyp test
         shell: python
         run: |
-          from gyp_xcode_emulation import XcodeVersion
+          from __future__ import absolute_import
+          from .gyp_xcode_emulation import XcodeVersion
           print(XcodeVersion())
       - name: Display platform information
         shell: python
