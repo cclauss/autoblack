@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 var fs = require('fs')
-var path = require('path')
+var path = require('path') 
 var root = path.resolve(__dirname, '..')
 var glob = require('glob')
 var conversion = { cli: 1, api: 3, files: 5, misc: 7 }
