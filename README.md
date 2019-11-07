@@ -24,6 +24,7 @@ See [this comment from @chrispat](https://github.community/t5/GitHub-Actions/Can
 3. Submit that change as a pull request.
 4. This Action should run and reformat the code to be Black compliant and commit that to your pull request.
 
-[.github/workflows/reblack.yml](.github/workflows/reblack.yml)
+[.github/workflows/autoblack_push.yml](.github/workflows/autoblack_push.yml)
+[.github/workflows/autoblack_pull_request.yml](.github/workflows/autoblack_pull_request.yml)
 
 In no way related to https://www.urbandictionary.com/define.php?term=autoblack
