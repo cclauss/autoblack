@@ -1,6 +1,6 @@
 # GitHub Action that uses Black to reformat Python code (if needed) when doing a git push.
 # If all Python code in the repo is complient with Black then this Action does nothing.
-# Othewrwise, Black is run and its changes are committed to a new pull request.
+# Otherwise, Black is run and its changes are committed to the repo.
 # https://github.com/cclauss/autoblack
 
 name: autoblack_push
@@ -17,16 +17,9 @@ jobs:
         if: failure()
         run: |
           black .
-          printenv | grep GITHUB
           git config --global user.name github-actions
           git config --global user.email '${GITHUB_ACTOR}@users.noreply.github.com'          
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-          git remote -v || true
-          git branch || true
-          echo DO NOT git checkout $GITHUB_HEAD_REF
-          ## git checkout $GITHUB_HEAD_REF
-          echo ready to commit
           git commit -am "fixup! Format Python code with psf/black push"
-          echo ready to push
           git push --force origin HEAD:$GITHUB_REF
 
