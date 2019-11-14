@@ -1,7 +1,6 @@
-
-# GitHub Action that uses Black to reformat the Python code in an incoming pull request.
-# If all Python code in the pull request is complient with Black then this Action does nothing.
-# Othewrwise, Black is run and its changes are committed back to the incoming pull request.
+# GitHub Action that uses Black to reformat Python code (if needed) when doing a git push.
+# If all Python code in the repo is complient with Black then this Action does nothing.
+# Othewrwise, Black is run and its changes are committed to a new pull request.
 # https://github.com/cclauss/autoblack
 
 name: autoblack_push
@@ -14,7 +13,7 @@ jobs:
       - uses: actions/setup-python@v1
       - run: pip install black
       - run: black --check .
-      - name: If needed, commit black changes to the pull request
+      - name: If needed, commit black changes to a new pull request
         if: failure()
         run: |
           black .
@@ -29,38 +28,5 @@ jobs:
           echo ready to commit
           git commit -am "fixup! Format Python code with psf/black push"
           echo ready to push
-          # git push
           git push --force origin HEAD:$GITHUB_REF
-          # remote: Permission to cclauss/autoblack.git denied to github-actions[bot].
-          # fatal: unable to access 'https://github.com/cclauss/autoblack/': The requested URL returned error: 403
-          # https://github.com/cclauss/autoblack/pull/9
-          # https://github.com/elephantworks/autoblack/edit/patch-1/platform_info.py?pr=%2Fcclauss%2Fautoblack%2Fpull%2F9
-          # error: Your local changes to the following files would be overwritten by checkout:
-          # platform_info.py
-          # Please commit your changes or stash them before you switch branches.
-          # Aborting
-          # git checkout patch-1
-         #git remote -v || true
-          #git branch || true
-          #echo "A"
-          #git remote add locala ***github.com/${GITHUB_ACTOR}/autoblack || true
-          #echo "B"
-          #git remote add localb github.com/${GITHUB_ACTOR}/autoblack || true
-          #echo "C"
-          #git remote add localc git@github.com/${GITHUB_ACTOR}/autoblack.git || true
-          #echo "D"
-          #git remote add locald https://github.com/${GITHUB_ACTOR}/autoblack || true
-          #echo "E"          
-          #git remote -v || true
-          #git branch || true
-          #echo "F"          
-          ##git push locala || true
-          #git push locala HEAD:${GITHUB_REF:5} || true
-          #echo "G"          
-          ##git push locald || true
-          #git push locald HEAD:${GITHUB_REF:5} || true
-          ## git push origin HEAD:${GITHUB_REF:5}
-          #echo "H"
-          ## git push
-          #git remote -v || true
-          #git branch || true
+
