@@ -34,7 +34,7 @@ XCODE_ARCHS_DEFAULT_CACHE = None
 
 def XcodeArchsVariableMapping(archs, archs_including_64_bit=None):
     """Constructs a dictionary with expansion for $(ARCHS_STANDARD) variable,
-  and optionally for $(ARCHS_STANDARD_INCLUDING_64_BIT)."""
+    and optionally for $(ARCHS_STANDARD_INCLUDING_64_BIT)."""
     mapping = {"$(ARCHS_STANDARD)": archs}
     if archs_including_64_bit:
         mapping["$(ARCHS_STANDARD_INCLUDING_64_BIT)"] = archs_including_64_bit
@@ -43,10 +43,10 @@ def XcodeArchsVariableMapping(archs, archs_including_64_bit=None):
 
 class XcodeArchsDefault(object):
     """A class to resolve ARCHS variable from xcode_settings, resolving Xcode
-  macros and implementing filtering by VALID_ARCHS. The expansion of macros
-  depends on the SDKROOT used ("macosx", "iphoneos", "iphonesimulator") and
-  on the version of Xcode.
-  """
+    macros and implementing filtering by VALID_ARCHS. The expansion of macros
+    depends on the SDKROOT used ("macosx", "iphoneos", "iphonesimulator") and
+    on the version of Xcode.
+    """
 
     # Match variable like $(ARCHS_STANDARD).
     variable_pattern = re.compile(r"\$\([a-zA-Z_][a-zA-Z0-9_]*\)$")
@@ -85,8 +85,8 @@ class XcodeArchsDefault(object):
 
     def ActiveArchs(self, archs, valid_archs, sdkroot):
         """Expands variables references in ARCHS, and filter by VALID_ARCHS if it
-    is defined (if not set, Xcode accept any value in ARCHS, otherwise, only
-    values present in VALID_ARCHS are kept)."""
+        is defined (if not set, Xcode accept any value in ARCHS, otherwise, only
+        values present in VALID_ARCHS are kept)."""
         expanded_archs = self._ExpandArchs(archs or self._default, sdkroot or "")
         if valid_archs:
             filtered_archs = []
@@ -99,24 +99,24 @@ class XcodeArchsDefault(object):
 
 def GetXcodeArchsDefault():
     """Returns the |XcodeArchsDefault| object to use to expand ARCHS for the
-  installed version of Xcode. The default values used by Xcode for ARCHS
-  and the expansion of the variables depends on the version of Xcode used.
+    installed version of Xcode. The default values used by Xcode for ARCHS
+    and the expansion of the variables depends on the version of Xcode used.
 
-  For all version anterior to Xcode 5.0 or posterior to Xcode 5.1 included
-  uses $(ARCHS_STANDARD) if ARCHS is unset, while Xcode 5.0 to 5.0.2 uses
-  $(ARCHS_STANDARD_INCLUDING_64_BIT). This variable was added to Xcode 5.0
-  and deprecated with Xcode 5.1.
+    For all version anterior to Xcode 5.0 or posterior to Xcode 5.1 included
+    uses $(ARCHS_STANDARD) if ARCHS is unset, while Xcode 5.0 to 5.0.2 uses
+    $(ARCHS_STANDARD_INCLUDING_64_BIT). This variable was added to Xcode 5.0
+    and deprecated with Xcode 5.1.
 
-  For "macosx" SDKROOT, all version starting with Xcode 5.0 includes 64-bit
-  architecture as part of $(ARCHS_STANDARD) and default to only building it.
+    For "macosx" SDKROOT, all version starting with Xcode 5.0 includes 64-bit
+    architecture as part of $(ARCHS_STANDARD) and default to only building it.
 
-  For "iphoneos" and "iphonesimulator" SDKROOT, 64-bit architectures are part
-  of $(ARCHS_STANDARD_INCLUDING_64_BIT) from Xcode 5.0. From Xcode 5.1, they
-  are also part of $(ARCHS_STANDARD).
+    For "iphoneos" and "iphonesimulator" SDKROOT, 64-bit architectures are part
+    of $(ARCHS_STANDARD_INCLUDING_64_BIT) from Xcode 5.0. From Xcode 5.1, they
+    are also part of $(ARCHS_STANDARD).
 
-  All thoses rules are coded in the construction of the |XcodeArchsDefault|
-  object to use depending on the version of Xcode detected. The object is
-  for performance reason."""
+    All thoses rules are coded in the construction of the |XcodeArchsDefault|
+    object to use depending on the version of Xcode detected. The object is
+    for performance reason."""
     global XCODE_ARCHS_DEFAULT_CACHE
     if XCODE_ARCHS_DEFAULT_CACHE:
         return XCODE_ARCHS_DEFAULT_CACHE
@@ -190,8 +190,8 @@ class XcodeSettings(object):
 
     def _ConvertConditionalKeys(self, configname):
         """Converts or warns on conditional keys.  Xcode supports conditional keys,
-    such as CODE_SIGN_IDENTITY[sdk=iphoneos*].  This is a partial implementation
-    with some keys converted while the rest force a warning."""
+        such as CODE_SIGN_IDENTITY[sdk=iphoneos*].  This is a partial implementation
+        with some keys converted while the rest force a warning."""
         settings = self.xcode_settings[configname]
         conditional_keys = [key for key in settings if key.endswith("]")]
         for key in conditional_keys:
@@ -246,13 +246,13 @@ class XcodeSettings(object):
 
     def GetFrameworkVersion(self):
         """Returns the framework version of the current target. Only valid for
-    bundles."""
+        bundles."""
         assert self._IsBundle()
         return self.GetPerTargetSetting("FRAMEWORK_VERSION", default="A")
 
     def GetWrapperExtension(self):
         """Returns the bundle extension (.app, .framework, .plugin, etc).  Only
-    valid for bundles."""
+        valid for bundles."""
         assert self._IsBundle()
         if self.spec["type"] in ("loadable_module", "shared_library"):
             default_wrapper_extension = {
@@ -287,13 +287,13 @@ class XcodeSettings(object):
 
     def GetWrapperName(self):
         """Returns the directory name of the bundle represented by this target.
-    Only valid for bundles."""
+        Only valid for bundles."""
         assert self._IsBundle()
         return self.GetProductName() + self.GetWrapperExtension()
 
     def GetBundleContentsFolderPath(self):
         """Returns the qualified path to the bundle's contents folder. E.g.
-    Chromium.app/Contents or Foo.bundle/Versions/A. Only valid for bundles."""
+        Chromium.app/Contents or Foo.bundle/Versions/A. Only valid for bundles."""
         if self.isIOS:
             return self.GetWrapperName()
         assert self._IsBundle()
@@ -307,7 +307,7 @@ class XcodeSettings(object):
 
     def GetBundleResourceFolder(self):
         """Returns the qualified path to the bundle's resource folder. E.g.
-    Chromium.app/Contents/Resources. Only valid for bundles."""
+        Chromium.app/Contents/Resources. Only valid for bundles."""
         assert self._IsBundle()
         if self.isIOS:
             return self.GetBundleContentsFolderPath()
@@ -315,7 +315,7 @@ class XcodeSettings(object):
 
     def GetBundlePlistPath(self):
         """Returns the qualified path to the bundle's plist file. E.g.
-    Chromium.app/Contents/Info.plist. Only valid for bundles."""
+        Chromium.app/Contents/Info.plist. Only valid for bundles."""
         assert self._IsBundle()
         if self.spec["type"] in ("executable", "loadable_module"):
             return os.path.join(self.GetBundleContentsFolderPath(), "Info.plist")
@@ -372,7 +372,7 @@ class XcodeSettings(object):
 
     def _GetBundleBinaryPath(self):
         """Returns the name of the bundle binary of by this target.
-    E.g. Chromium.app/Contents/MacOS/Chromium. Only valid for bundles."""
+        E.g. Chromium.app/Contents/MacOS/Chromium. Only valid for bundles."""
         assert self._IsBundle()
         if self.spec["type"] in ("shared_library") or self.isIOS:
             path = self.GetBundleContentsFolderPath()
@@ -405,14 +405,16 @@ class XcodeSettings(object):
 
     def _GetStandaloneBinaryPath(self):
         """Returns the name of the non-bundle binary represented by this target.
-    E.g. hello_world. Only valid for non-bundles."""
+        E.g. hello_world. Only valid for non-bundles."""
         assert not self._IsBundle()
         assert self.spec["type"] in (
             "executable",
             "shared_library",
             "static_library",
             "loadable_module",
-        ), ("Unexpected type %s" % self.spec["type"])
+        ), (
+            "Unexpected type %s" % self.spec["type"]
+        )
         target = self.spec["target_name"]
         if self.spec["type"] == "static_library":
             if target[:3] == "lib":
@@ -428,7 +430,7 @@ class XcodeSettings(object):
 
     def GetExecutableName(self):
         """Returns the executable name of the bundle represented by this target.
-    E.g. Chromium."""
+        E.g. Chromium."""
         if self._IsBundle():
             return self.spec.get("product_name", self.spec["target_name"])
         else:
@@ -436,7 +438,7 @@ class XcodeSettings(object):
 
     def GetExecutablePath(self):
         """Returns the directory name of the bundle represented by this target. E.g.
-    Chromium.app/Contents/MacOS/Chromium."""
+        Chromium.app/Contents/MacOS/Chromium."""
         if self._IsBundle():
             return self._GetBundleBinaryPath()
         else:
@@ -497,7 +499,7 @@ class XcodeSettings(object):
 
     def GetCflags(self, configname, arch=None):
         """Returns flags that need to be added to .c, .cc, .m, and .mm
-    compilations."""
+        compilations."""
         # This functions (and the similar ones below) do not offer complete
         # emulation of all xcode_settings keys. They're implemented on demand.
 
@@ -786,7 +788,7 @@ class XcodeSettings(object):
 
     def _MapLinkerFlagFilename(self, ldflag, gyp_to_build_path):
         """Checks if ldflag contains a filename and if so remaps it from
-    gyp-directory-relative to build-directory-relative."""
+        gyp-directory-relative to build-directory-relative."""
         # This list is expanded on demand.
         # They get matched as:
         #   -exported_symbols_list file
@@ -818,13 +820,13 @@ class XcodeSettings(object):
     def GetLdflags(self, configname, product_dir, gyp_to_build_path, arch=None):
         """Returns flags that need to be passed to the linker.
 
-    Args:
-        configname: The name of the configuration to get ld flags for.
-        product_dir: The directory where products such static and dynamic
-            libraries are placed. This is added to the library search path.
-        gyp_to_build_path: A function that converts paths relative to the
-            current gyp file to paths relative to the build directory.
-    """
+        Args:
+            configname: The name of the configuration to get ld flags for.
+            product_dir: The directory where products such static and dynamic
+                libraries are placed. This is added to the library search path.
+            gyp_to_build_path: A function that converts paths relative to the
+                current gyp file to paths relative to the build directory.
+        """
         self.configname = configname
         ldflags = []
 
@@ -919,9 +921,9 @@ class XcodeSettings(object):
     def GetLibtoolflags(self, configname):
         """Returns flags that need to be passed to the static linker.
 
-    Args:
-        configname: The name of the configuration to get ld flags for.
-    """
+        Args:
+            configname: The name of the configuration to get ld flags for.
+        """
         self.configname = configname
         libtoolflags = []
 
@@ -934,7 +936,7 @@ class XcodeSettings(object):
 
     def GetPerTargetSettings(self):
         """Gets a list of all the per-target settings. This will only fetch keys
-    whose values are the same across all configurations."""
+        whose values are the same across all configurations."""
         first_pass = True
         result = {}
         for configname in sorted(self.xcode_settings.keys()):
@@ -957,7 +959,7 @@ class XcodeSettings(object):
 
     def GetPerTargetSetting(self, setting, default=None):
         """Tries to get xcode_settings.setting from spec. Assumes that the setting
-       has the same value in all configurations and throws otherwise."""
+        has the same value in all configurations and throws otherwise."""
         is_first_pass = True
         result = None
         for configname in sorted(self.xcode_settings.keys()):
@@ -975,8 +977,8 @@ class XcodeSettings(object):
 
     def _GetStripPostbuilds(self, configname, output_binary, quiet):
         """Returns a list of shell commands that contain the shell commands
-    necessary to strip this target's binary. These should be run as postbuilds
-    before the actual postbuilds run."""
+        necessary to strip this target's binary. These should be run as postbuilds
+        before the actual postbuilds run."""
         self.configname = configname
 
         result = []
@@ -991,9 +993,11 @@ class XcodeSettings(object):
                 default_strip_style = "all"
 
             strip_style = self._Settings().get("STRIP_STYLE", default_strip_style)
-            strip_flags = {"all": "", "non-global": "-x", "debugging": "-S",}[
-                strip_style
-            ]
+            strip_flags = {
+                "all": "",
+                "non-global": "-x",
+                "debugging": "-S",
+            }[strip_style]
 
             explicit_strip_flags = self._Settings().get("STRIPFLAGS", "")
             if explicit_strip_flags:
@@ -1008,8 +1012,8 @@ class XcodeSettings(object):
 
     def _GetDebugInfoPostbuilds(self, configname, output, output_binary, quiet):
         """Returns a list of shell commands that contain the shell commands
-    necessary to massage this target's debug information. These should be run
-    as postbuilds before the actual postbuilds run."""
+        necessary to massage this target's debug information. These should be run
+        as postbuilds before the actual postbuilds run."""
         self.configname = configname
 
         # For static libraries, no dSYMs are created.
@@ -1030,7 +1034,7 @@ class XcodeSettings(object):
 
     def _GetTargetPostbuilds(self, configname, output, output_binary, quiet=False):
         """Returns a list of shell commands that contain the shell commands
-    to run as postbuilds for this target, before the actual postbuilds."""
+        to run as postbuilds for this target, before the actual postbuilds."""
         # dSYMs need to build before stripping happens.
         return self._GetDebugInfoPostbuilds(
             configname, output, output_binary, quiet
@@ -1038,8 +1042,8 @@ class XcodeSettings(object):
 
     def _GetIOSPostbuilds(self, configname, output_binary):
         """Return a shell command to codesign the iOS output binary so it can
-    be deployed to a device.  This should be run as the very last step of the
-    build."""
+        be deployed to a device.  This should be run as the very last step of the
+        build."""
         if not (self.isIOS and self.spec["type"] == "executable"):
             return []
 
@@ -1090,7 +1094,7 @@ class XcodeSettings(object):
         self, configname, output, output_binary, postbuilds=[], quiet=False
     ):
         """Returns a list of shell commands that should run before and after
-    |postbuilds|."""
+        |postbuilds|."""
         assert output_binary is not None
         pre = self._GetTargetPostbuilds(configname, output, output_binary, quiet)
         post = self._GetIOSPostbuilds(configname, output_binary)
@@ -1129,8 +1133,8 @@ class XcodeSettings(object):
 
     def AdjustLibraries(self, libraries, config_name=None):
         """Transforms entries like 'Cocoa.framework' in libraries into entries like
-    '-framework Cocoa', 'libcrypto.dylib' into '-lcrypto', etc.
-    """
+        '-framework Cocoa', 'libcrypto.dylib' into '-lcrypto', etc.
+        """
         libraries = [self._AdjustLibrary(library, config_name) for library in libraries]
         return libraries
 
@@ -1183,10 +1187,10 @@ class XcodeSettings(object):
     def _DefaultSdkRoot(self):
         """Returns the default SDKROOT to use.
 
-    Prior to version 5.0.0, if SDKROOT was not explicitly set in the Xcode
-    project, then the environment variable was empty. Starting with this
-    version, Xcode uses the name of the newest SDK installed.
-    """
+        Prior to version 5.0.0, if SDKROOT was not explicitly set in the Xcode
+        project, then the environment variable was empty. Starting with this
+        version, Xcode uses the name of the newest SDK installed.
+        """
         xcode_version, _ = XcodeVersion()
         if xcode_version < "0500":
             return ""
@@ -1212,39 +1216,39 @@ class XcodeSettings(object):
 class MacPrefixHeader(object):
     """A class that helps with emulating Xcode's GCC_PREFIX_HEADER feature.
 
-  This feature consists of several pieces:
-  * If GCC_PREFIX_HEADER is present, all compilations in that project get an
-    additional |-include path_to_prefix_header| cflag.
-  * If GCC_PRECOMPILE_PREFIX_HEADER is present too, then the prefix header is
-    instead compiled, and all other compilations in the project get an
-    additional |-include path_to_compiled_header| instead.
-    + Compiled prefix headers have the extension gch. There is one gch file for
-      every language used in the project (c, cc, m, mm), since gch files for
-      different languages aren't compatible.
-    + gch files themselves are built with the target's normal cflags, but they
-      obviously don't get the |-include| flag. Instead, they need a -x flag that
-      describes their language.
-    + All o files in the target need to depend on the gch file, to make sure
-      it's built before any o file is built.
+    This feature consists of several pieces:
+    * If GCC_PREFIX_HEADER is present, all compilations in that project get an
+      additional |-include path_to_prefix_header| cflag.
+    * If GCC_PRECOMPILE_PREFIX_HEADER is present too, then the prefix header is
+      instead compiled, and all other compilations in the project get an
+      additional |-include path_to_compiled_header| instead.
+      + Compiled prefix headers have the extension gch. There is one gch file for
+        every language used in the project (c, cc, m, mm), since gch files for
+        different languages aren't compatible.
+      + gch files themselves are built with the target's normal cflags, but they
+        obviously don't get the |-include| flag. Instead, they need a -x flag that
+        describes their language.
+      + All o files in the target need to depend on the gch file, to make sure
+        it's built before any o file is built.
 
-  This class helps with some of these tasks, but it needs help from the build
-  system for writing dependencies to the gch files, for writing build commands
-  for the gch files, and for figuring out the location of the gch files.
-  """
+    This class helps with some of these tasks, but it needs help from the build
+    system for writing dependencies to the gch files, for writing build commands
+    for the gch files, and for figuring out the location of the gch files.
+    """
 
     def __init__(
         self, xcode_settings, gyp_path_to_build_path, gyp_path_to_build_output
     ):
         """If xcode_settings is None, all methods on this class are no-ops.
 
-    Args:
-        gyp_path_to_build_path: A function that takes a gyp-relative path,
-            and returns a path relative to the build directory.
-        gyp_path_to_build_output: A function that takes a gyp-relative path and
-            a language code ('c', 'cc', 'm', or 'mm'), and that returns a path
-            to where the output of precompiling that path for that language
-            should be placed (without the trailing '.gch').
-    """
+        Args:
+            gyp_path_to_build_path: A function that takes a gyp-relative path,
+                and returns a path relative to the build directory.
+            gyp_path_to_build_output: A function that takes a gyp-relative path and
+                a language code ('c', 'cc', 'm', or 'mm'), and that returns a path
+                to where the output of precompiling that path for that language
+                should be placed (without the trailing '.gch').
+        """
         # This doesn't support per-configuration prefix headers. Good enough
         # for now.
         self.header = None
@@ -1289,9 +1293,9 @@ class MacPrefixHeader(object):
 
     def GetObjDependencies(self, sources, objs, arch=None):
         """Given a list of source files and the corresponding object files, returns
-    a list of (source, object, gch) tuples, where |gch| is the build-directory
-    relative path to the gch file each object file depends on.  |compilable[i]|
-    has to be the source file belonging to |objs[i]|."""
+        a list of (source, object, gch) tuples, where |gch| is the build-directory
+        relative path to the gch file each object file depends on.  |compilable[i]|
+        has to be the source file belonging to |objs[i]|."""
         if not self.header or not self.compile_headers:
             return []
 
@@ -1312,8 +1316,8 @@ class MacPrefixHeader(object):
 
     def GetPchBuildCommands(self, arch=None):
         """Returns [(path_to_gch, language_flag, language, header)].
-    |path_to_gch| and |header| are relative to the build directory.
-    """
+        |path_to_gch| and |header| are relative to the build directory.
+        """
         if not self.header or not self.compile_headers:
             return []
         return [
@@ -1387,8 +1391,8 @@ def CLTVersion():
 
 def GetStdoutQuiet(cmdlist):
     """Returns the content of standard output returned by invoking |cmdlist|.
-  Ignores the stderr.
-  Raises |GypError| if the command return with a non-zero return code."""
+    Ignores the stderr.
+    Raises |GypError| if the command return with a non-zero return code."""
     job = subprocess.Popen(cmdlist, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out = job.communicate()[0]
     if PY3:
@@ -1400,7 +1404,7 @@ def GetStdoutQuiet(cmdlist):
 
 def GetStdout(cmdlist):
     """Returns the content of standard output returned by invoking |cmdlist|.
-  Raises |GypError| if the command return with a non-zero return code."""
+    Raises |GypError| if the command return with a non-zero return code."""
     job = subprocess.Popen(cmdlist, stdout=subprocess.PIPE)
     out = job.communicate()[0]
     if PY3:
@@ -1413,9 +1417,9 @@ def GetStdout(cmdlist):
 
 def MergeGlobalXcodeSettingsToSpec(global_dict, spec):
     """Merges the global xcode_settings dictionary into each configuration of the
-  target represented by spec. For keys that are both in the global and the local
-  xcode_settings dict, the local key gets precedence.
-  """
+    target represented by spec. For keys that are both in the global and the local
+    xcode_settings dict, the local key gets precedence.
+    """
     # The xcode generator special-cases global xcode_settings and does something
     # that amounts to merging in the global xcode_settings into each local
     # xcode_settings dict.
@@ -1430,9 +1434,9 @@ def MergeGlobalXcodeSettingsToSpec(global_dict, spec):
 def IsMacBundle(flavor, spec):
     """Returns if |spec| should be treated as a bundle.
 
-  Bundles are directories with a certain subdirectory structure, instead of
-  just a single file. Bundle rules do not produce a binary but also package
-  resources into that directory."""
+    Bundles are directories with a certain subdirectory structure, instead of
+    just a single file. Bundle rules do not produce a binary but also package
+    resources into that directory."""
     is_mac_bundle = int(spec.get("mac_bundle", 0)) != 0 and flavor == "mac"
     if is_mac_bundle:
         assert spec["type"] != "none", (
@@ -1444,14 +1448,14 @@ def IsMacBundle(flavor, spec):
 
 def GetMacBundleResources(product_dir, xcode_settings, resources):
     """Yields (output, resource) pairs for every resource in |resources|.
-  Only call this for mac bundle targets.
+    Only call this for mac bundle targets.
 
-  Args:
-      product_dir: Path to the directory containing the output bundle,
-          relative to the build directory.
-      xcode_settings: The XcodeSettings of the current target.
-      resources: A list of bundle resources, relative to the build directory.
-  """
+    Args:
+        product_dir: Path to the directory containing the output bundle,
+            relative to the build directory.
+        xcode_settings: The XcodeSettings of the current target.
+        resources: A list of bundle resources, relative to the build directory.
+    """
     dest = os.path.join(product_dir, xcode_settings.GetBundleResourceFolder())
     for res in resources:
         output = dest
@@ -1482,24 +1486,24 @@ def GetMacBundleResources(product_dir, xcode_settings, resources):
 
 def GetMacInfoPlist(product_dir, xcode_settings, gyp_path_to_build_path):
     """Returns (info_plist, dest_plist, defines, extra_env), where:
-  * |info_plist| is the source plist path, relative to the
-    build directory,
-  * |dest_plist| is the destination plist path, relative to the
-    build directory,
-  * |defines| is a list of preprocessor defines (empty if the plist
-    shouldn't be preprocessed,
-  * |extra_env| is a dict of env variables that should be exported when
-    invoking |mac_tool copy-info-plist|.
+    * |info_plist| is the source plist path, relative to the
+      build directory,
+    * |dest_plist| is the destination plist path, relative to the
+      build directory,
+    * |defines| is a list of preprocessor defines (empty if the plist
+      shouldn't be preprocessed,
+    * |extra_env| is a dict of env variables that should be exported when
+      invoking |mac_tool copy-info-plist|.
 
-  Only call this for mac bundle targets.
+    Only call this for mac bundle targets.
 
-  Args:
-      product_dir: Path to the directory containing the output bundle,
-          relative to the build directory.
-      xcode_settings: The XcodeSettings of the current target.
-      gyp_to_build_path: A function that converts paths relative to the
-          current gyp file to paths relative to the build directory.
-  """
+    Args:
+        product_dir: Path to the directory containing the output bundle,
+            relative to the build directory.
+        xcode_settings: The XcodeSettings of the current target.
+        gyp_to_build_path: A function that converts paths relative to the
+            current gyp file to paths relative to the build directory.
+    """
     info_plist = xcode_settings.GetPerTargetSetting("INFOPLIST_FILE")
     if not info_plist:
         return None, None, [], {}
@@ -1537,18 +1541,18 @@ def _GetXcodeEnv(
     xcode_settings, built_products_dir, srcroot, configuration, additional_settings=None
 ):
     """Return the environment variables that Xcode would set. See
-  http://developer.apple.com/library/mac/#documentation/DeveloperTools/Reference/XcodeBuildSettingRef/1-Build_Setting_Reference/build_setting_ref.html#//apple_ref/doc/uid/TP40003931-CH3-SW153
-  for a full list.
+    http://developer.apple.com/library/mac/#documentation/DeveloperTools/Reference/XcodeBuildSettingRef/1-Build_Setting_Reference/build_setting_ref.html#//apple_ref/doc/uid/TP40003931-CH3-SW153
+    for a full list.
 
-  Args:
-      xcode_settings: An XcodeSettings object. If this is None, this function
-          returns an empty dict.
-      built_products_dir: Absolute path to the built products dir.
-      srcroot: Absolute path to the source root.
-      configuration: The build configuration name.
-      additional_settings: An optional dict with more values to add to the
-          result.
-  """
+    Args:
+        xcode_settings: An XcodeSettings object. If this is None, this function
+            returns an empty dict.
+        built_products_dir: Absolute path to the built products dir.
+        srcroot: Absolute path to the source root.
+        configuration: The build configuration name.
+        additional_settings: An optional dict with more values to add to the
+            result.
+    """
     if not xcode_settings:
         return {}
 
@@ -1628,8 +1632,8 @@ def _GetXcodeEnv(
 
 def _NormalizeEnvVarReferences(str):
     """Takes a string containing variable references in the form ${FOO}, $(FOO),
-  or $FOO, and returns a string with all variable references in the form ${FOO}.
-  """
+    or $FOO, and returns a string with all variable references in the form ${FOO}.
+    """
     # $FOO -> ${FOO}
     str = re.sub(r"\$([a-zA-Z_][a-zA-Z0-9_]*)", r"${\1}", str)
 
@@ -1645,9 +1649,9 @@ def _NormalizeEnvVarReferences(str):
 
 def ExpandEnvVars(string, expansions):
     """Expands ${VARIABLES}, $(VARIABLES), and $VARIABLES in string per the
-  expansions list. If the variable expands to something that references
-  another variable, this variable is expanded as well if it's in env --
-  until no variables present in env are left."""
+    expansions list. If the variable expands to something that references
+    another variable, this variable is expanded as well if it's in env --
+    until no variables present in env are left."""
     for k, v in reversed(expansions):
         string = string.replace("${" + k + "}", v)
         string = string.replace("$(" + k + ")", v)
@@ -1657,11 +1661,11 @@ def ExpandEnvVars(string, expansions):
 
 def _TopologicallySortedEnvVarKeys(env):
     """Takes a dict |env| whose values are strings that can refer to other keys,
-  for example env['foo'] = '$(bar) and $(baz)'. Returns a list L of all keys of
-  env such that key2 is after key1 in L if env[key2] refers to env[key1].
+    for example env['foo'] = '$(bar) and $(baz)'. Returns a list L of all keys of
+    env such that key2 is after key1 in L if env[key2] refers to env[key1].
 
-  Throws an Exception in case of dependency cycles.
-  """
+    Throws an Exception in case of dependency cycles.
+    """
     # Since environment variables can refer to other variables, the evaluation
     # order is important. Below is the logic to compute the dependency graph
     # and sort it.
@@ -1702,7 +1706,7 @@ def GetSortedXcodeEnv(
 
 def GetSpecPostbuildCommands(spec, quiet=False):
     """Returns the list of postbuilds explicitly defined on |spec|, in a form
-  executable by a shell."""
+    executable by a shell."""
     postbuilds = []
     for postbuild in spec.get("postbuilds", []):
         if not quiet:
@@ -1716,7 +1720,7 @@ def GetSpecPostbuildCommands(spec, quiet=False):
 
 def _HasIOSTarget(targets):
     """Returns true if any target contains the iOS specific key
-  IPHONEOS_DEPLOYMENT_TARGET."""
+    IPHONEOS_DEPLOYMENT_TARGET."""
     for target_dict in targets.values():
         for config in target_dict["configurations"].values():
             if config.get("xcode_settings", {}).get("IPHONEOS_DEPLOYMENT_TARGET"):
@@ -1726,7 +1730,7 @@ def _HasIOSTarget(targets):
 
 def _AddIOSDeviceConfigurations(targets):
     """Clone all targets and append -iphoneos to the name. Configure these targets
-  to build for iOS devices and use correct architectures for those builds."""
+    to build for iOS devices and use correct architectures for those builds."""
     for target_dict in targets.values():
         toolset = target_dict["toolset"]
         configs = target_dict["configurations"]
@@ -1741,7 +1745,7 @@ def _AddIOSDeviceConfigurations(targets):
 
 def CloneConfigurationForDeviceAndEmulator(target_dicts):
     """If |target_dicts| contains any iOS targets, automatically create -iphoneos
-  targets for iOS device builds."""
+    targets for iOS device builds."""
     if _HasIOSTarget(target_dicts):
         return _AddIOSDeviceConfigurations(target_dicts)
     return target_dicts
