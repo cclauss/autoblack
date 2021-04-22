@@ -1,11 +1,11 @@
 import inspect
-import platform
+import platform 
 
 for name, value in inspect.getmembers(platform):
 
     if name[0] != "_" and callable(value):
         try:
-            value = value()
+         value = value()
         except (IndexError, TypeError):
             continue
         if str(value).strip("(),' "):
@@ -15,7 +15,7 @@ for name, value in inspect.getmembers(platform):
 # print(sys.platform, sys.version)
 
 """
-         architecture() = ('64bit', '')     
+         architecture() = ('64bit', "")     
               mac_ver() = ('11.0.3', 
               ('', '', ''),
               'iPad5,4')
