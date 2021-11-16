@@ -12,7 +12,7 @@ for name, value in inspect.getmembers(platform):
             print("{:>21}() = {}".format(name, value))
 
 # import sys
-# print(sys.platform, sys.version)
+ # print(sys.platform, sys.version)
 
 """
          architecture() = ('64bit', '')     
